@@ -1,23 +1,20 @@
-﻿/// Napisz w Program.cs kod, który:
-/// - zadeklarujesz zmienną z imieniem
-/// zmienną z płcią
-/// zmienną z wiekiem
-/// zweryfikujesz dane i wyświetlisz jeden z komunikatów
-/// "Kobieta poniżej 30 lat"
-/// "Ewa, lat 33"
-/// "Niepełnoletni mężczyzna"
+﻿
+int[] digitCounts = new int[10];
+for (int i=0; i < 10; i++)
+{
+    digitCounts[i] = 0;
+}
 
-string name = "Maciej";
-string gender = "male";
-int age = 23;
+int number = 4566;
+string numberInString = number.ToString();
+char[] letters = numberInString.ToArray();
+foreach(char c in letters)
+{
+    int digit = c - '0';
+    digitCounts[digit]++;
+}
 
-Console.WriteLine("Podaj imię");
-name = Console.ReadLine();
-Console.WriteLine("Podaj płeć (male/female/...)");
-gender = Console.ReadLine();
-Console.WriteLine("Podaj wiek");
-age = int.Parse(Console.ReadLine());
-
-if (gender == "female" && age < 30) Console.WriteLine("Kobieta poniżej 30 lat");
-if (name == "Ewa" && age == 33) Console.WriteLine("Ewa, lat 30");
-if (gender == "male" && age < 18) Console.WriteLine("Niepełnoletni mężczyzna");
+for(int i=0; i < 10; i++)
+{
+    Console.WriteLine($"{i} => {digitCounts[i]}");
+}
