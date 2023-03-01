@@ -25,28 +25,28 @@
         }
         public void GiveGrade(double grade)
         {
-            var gradeFloat = (float)grade;
-            GiveGrade(gradeFloat);
+            var gradeAsFloat = (float)grade;
+            GiveGrade(gradeAsFloat);
         }
         public void GiveGrade(long grade)
         {
-            var gradeFloat = (float)grade;
-            GiveGrade(gradeFloat);
+            var gradeAsFloat = (float)grade;
+            GiveGrade(gradeAsFloat);
         }
         public void GiveGrade(int grade)
         {
-            var gradeFloat = (float)grade;
-            GiveGrade(gradeFloat);
+            var gradeAsFloat = (float)grade;
+            GiveGrade(gradeAsFloat);
         }
         public void GiveGrade(string gradeText)
         {
-            if (float.TryParse(gradeText, out float grade))
+            if (float.TryParse(gradeText, out float gradeAsFloat))
             {
-                this.GiveGrade(grade);
+                this.GiveGrade(gradeAsFloat);
             }
             else
             {
-                Console.WriteLine($"Podany string \"{grade}\" nie jest prawidłową liczbą.");
+                Console.WriteLine($"Podany string \"{gradeText}\" nie jest prawidłową liczbą.");
             }
         }
         public Statistics GetStatistics()
@@ -60,6 +60,83 @@
                     stats.Max = Math.Max(stats.Max, grade);
                     stats.Average += grade;
                 }
+                stats.Average /= Grades.Count;
+            }
+
+            return stats;
+        }
+        public Statistics GetStatisticsWithForEach()
+        {
+            var stats = new Statistics();
+            if (Grades.Count > 0)
+            {
+                foreach (var grade in Grades)
+                {
+                    stats.Min = Math.Min(stats.Min, grade);
+                    stats.Max = Math.Max(stats.Max, grade);
+                    stats.Average += grade;
+                }
+                stats.Average /= Grades.Count;
+            }
+
+            return stats;
+        }
+        public Statistics GetStatisticsWithFor()
+        {
+            var stats = new Statistics();
+            if (Grades.Count > 0)
+            {
+                for (int i = 0; i < Grades.Count; i++)
+                {
+                    var grade = Grades[i];
+
+                    stats.Min = Math.Min(stats.Min, grade);
+                    stats.Max = Math.Max(stats.Max, grade);
+                    stats.Average += grade;
+                }
+                stats.Average /= Grades.Count;
+            }
+
+            return stats;
+        }
+        public Statistics GetStatisticsWithWhile()
+        {
+            var stats = new Statistics();
+            if (Grades.Count > 0)
+            {
+                int i = 0;
+                while (i < Grades.Count)
+                {
+                    var grade = Grades[i];
+
+                    stats.Min = Math.Min(stats.Min, grade);
+                    stats.Max = Math.Max(stats.Max, grade);
+                    stats.Average += grade;
+
+                    i++;
+                }
+                stats.Average /= Grades.Count;
+            }
+
+            return stats;
+        }
+        public Statistics GetStatisticsWithDoWhile()
+        {
+            var stats = new Statistics();
+            if (Grades.Count > 0)
+            {
+                int i = 0;
+                do
+                {
+                    var grade = Grades[i];
+
+                    stats.Min = Math.Min(stats.Min, grade);
+                    stats.Max = Math.Max(stats.Max, grade);
+                    stats.Average += grade;
+
+                    i++;
+                }while(i<Grades.Count);
+
                 stats.Average /= Grades.Count;
             }
 
