@@ -23,7 +23,9 @@ namespace ChallengeApp.Tests
             var given = employee.GetStatistics();
             var expected = new Statistics();
             //Assert
-            Assert.That(given, Is.SameAs(expected));
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
         }
 
         [Test]
@@ -39,7 +41,9 @@ namespace ChallengeApp.Tests
             var given = employee.GetStatistics();
             var expected = new Statistics(0,0,0);
             //Assert
-            Assert.That(given, Is.SameAs(expected));
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
         }
 
         [Test]
@@ -54,7 +58,9 @@ namespace ChallengeApp.Tests
             var given = employee.GetStatistics();
             var expected = new Statistics(10, 50, 30);
             //Assert
-            Assert.That(given, Is.SameAs(expected));
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
         }
 
         [Test]
@@ -70,7 +76,9 @@ namespace ChallengeApp.Tests
             var given = employee.GetStatistics();
             var expected = new Statistics(-30, 45, 5);
             //Assert
-            Assert.That(given, Is.SameAs(expected));
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
         }
     }
 }

@@ -19,13 +19,16 @@
         public Statistics GetStatistics()
         {
             var stats = new Statistics();
-            foreach (var grade in Grades)
+            if (Grades.Count > 0)
             {
-                stats.Min = Math.Min(stats.Min, grade);
-                stats.Max = Math.Max(stats.Max, grade);
-                stats.Average += grade;
+                foreach (var grade in Grades)
+                {
+                    stats.Min = Math.Min(stats.Min, grade);
+                    stats.Max = Math.Max(stats.Max, grade);
+                    stats.Average += grade;
+                }
+                stats.Average /= Grades.Count;
             }
-            stats.Average /= Grades.Count;
 
             return stats;
         }
