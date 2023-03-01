@@ -12,9 +12,42 @@
         public string Name { get; private set; }
         public string LastName { get; private set; }
         public List<float> Grades { get; private set; } = new List<float>();
-        public void AssignGrade(float grade)
+        public void GiveGrade(float grade)
         {
-            Grades.Add(grade);
+            if (grade >= 0 && grade <= 100)
+            {
+                Grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine($"Podana ocena {grade} nie jest w przedziale 0-100.");
+            }
+        }
+        public void GiveGrade(double grade)
+        {
+            var gradeFloat = (float)grade;
+            GiveGrade(gradeFloat);
+        }
+        public void GiveGrade(long grade)
+        {
+            var gradeFloat = (float)grade;
+            GiveGrade(gradeFloat);
+        }
+        public void GiveGrade(int grade)
+        {
+            var gradeFloat = (float)grade;
+            GiveGrade(gradeFloat);
+        }
+        public void GiveGrade(string gradeText)
+        {
+            if (float.TryParse(gradeText, out float grade))
+            {
+                this.GiveGrade(grade);
+            }
+            else
+            {
+                Console.WriteLine($"Podany string \"{grade}\" nie jest prawidłową liczbą.");
+            }
         }
         public Statistics GetStatistics()
         {

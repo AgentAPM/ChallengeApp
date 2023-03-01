@@ -34,9 +34,9 @@ namespace ChallengeApp.Tests
             //Assign
             var employee = new Employee("", "");
             //Act
-            employee.AssignGrade(0);
-            employee.AssignGrade(0);
-            employee.AssignGrade(0);
+            employee.GiveGrade(0);
+            employee.GiveGrade(0);
+            employee.GiveGrade(0);
 
             var given = employee.GetStatistics();
             var expected = new Statistics(0,0,0);
@@ -52,8 +52,8 @@ namespace ChallengeApp.Tests
             //Assign
             var employee = new Employee("", "");
             //Act
-            employee.AssignGrade(50);
-            employee.AssignGrade(10);
+            employee.GiveGrade(50);
+            employee.GiveGrade(10);
 
             var given = employee.GetStatistics();
             var expected = new Statistics(10, 50, 30);
@@ -64,17 +64,76 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenNegativeGrades_ShouldReturnCorrect()
+        public void WhenOutOfRangeGrades_ShouldIgnore()
         {
             //Assign
             var employee = new Employee("", "");
             //Act
-            employee.AssignGrade(-30);
-            employee.AssignGrade(45);
-            employee.AssignGrade(0);
+            employee.GiveGrade(30);
+            employee.GiveGrade(150);
+            employee.GiveGrade(-2);
 
             var given = employee.GetStatistics();
-            var expected = new Statistics(-30, 45, 5);
+            var expected = new Statistics(30, 30, 30);
+            //Assert
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
+        }
+
+        [Test]
+        public void WhenStringGrades_ShouldReturnCorrect()
+        {
+            //Assign
+            var employee = new Employee("", "");
+            //Act
+            employee.GiveGrade("40");
+            employee.GiveGrade("60");
+
+            var given = employee.GetStatistics();
+            var expected = new Statistics(40, 60, 50);
+            //Assert
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
+        }
+        [Test]
+        public void WhenBadStringGrades_ShouldIgnore()
+        {
+            //Assign
+            var employee = new Employee("", "");
+            //Act
+            employee.GiveGrade("grade");
+            employee.GiveGrade("3-14");
+            employee.GiveGrade("20.70.9");
+
+            var given = employee.GetStatistics();
+            var expected = new Statistics();
+            //Assert
+            Assert.That(given.Min, Is.EqualTo(expected.Min));
+            Assert.That(given.Max, Is.EqualTo(expected.Max));
+            Assert.That(given.Average, Is.EqualTo(expected.Average));
+        }
+        [Test]
+        public void WhenDifferentTypeGrades_ShouldReturnCorrect()
+        {
+            //Assign
+            var employee = new Employee("", "");
+            float grade1 = 10;
+            int grade2 = 30;
+            string grade5 = "50";
+            double grade4 = 70;
+            long grade3 = 90;
+
+            //Act
+            employee.GiveGrade(grade1);
+            employee.GiveGrade(grade2);
+            employee.GiveGrade(grade3);
+            employee.GiveGrade(grade4);
+            employee.GiveGrade(grade5);
+
+            var given = employee.GetStatistics();
+            var expected = new Statistics(10,90,50);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
             Assert.That(given.Max, Is.EqualTo(expected.Max));
