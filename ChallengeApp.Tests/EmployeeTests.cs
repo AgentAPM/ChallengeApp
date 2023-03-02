@@ -143,83 +143,34 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenForEach_ShouldReturnCorrect()
+        public void WhenLetterGrades_ShouldReturnCorrect()
         {
             //Assign
             var employee = new Employee("", "");
-            //Act
-            employee.GiveGrade(20);
-            employee.GiveGrade(50);
-            employee.GiveGrade(10);
-            employee.GiveGrade(90);
-            employee.GiveGrade(10);
 
-            var given = employee.GetStatisticsWithForEach();
-            var expected = new Statistics(10, 90, 36);
+            //Act
+            employee.GiveGrade('A');
+            employee.GiveGrade('A');
+            employee.GiveGrade('B');
+            employee.GiveGrade('A');
+            employee.GiveGrade('C');
+
+            var given = employee.GetStatistics();
             //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
+            Assert.That(given.AverageLetter, Is.EqualTo('A'));
         }
 
         [Test]
-        public void WhenFor_ShouldReturnCorrect()
+        public void WhenNoLetterGrades_ShouldReturnCorrect()
         {
             //Assign
             var employee = new Employee("", "");
+
             //Act
-            employee.GiveGrade(20);
-            employee.GiveGrade(50);
-            employee.GiveGrade(10);
-            employee.GiveGrade(90);
-            employee.GiveGrade(10);
 
-            var given = employee.GetStatisticsWithFor();
-            var expected = new Statistics(10, 90, 36);
+            var given = employee.GetStatistics();
             //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
-        }
-
-        [Test]
-        public void WhenWhile_ShouldReturnCorrect()
-        {
-            //Assign
-            var employee = new Employee("", "");
-            //Act
-            employee.GiveGrade(20);
-            employee.GiveGrade(50);
-            employee.GiveGrade(10);
-            employee.GiveGrade(90);
-            employee.GiveGrade(10);
-
-            var given = employee.GetStatisticsWithWhile();
-            var expected = new Statistics(10, 90, 36);
-            //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
-        }
-
-        [Test]
-        public void WhenDoWhile_ShouldReturnCorrect()
-        {
-            //Assign
-            var employee = new Employee("", "");
-            //Act
-            employee.GiveGrade(20);
-            employee.GiveGrade(50);
-            employee.GiveGrade(10);
-            employee.GiveGrade(90);
-            employee.GiveGrade(10);
-
-            var given = employee.GetStatisticsWithDoWhile();
-            var expected = new Statistics(10, 90, 36);
-            //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
+            Assert.That(given.AverageLetter, Is.EqualTo('F'));
         }
     }
 }
