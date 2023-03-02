@@ -1,6 +1,6 @@
 namespace ChallengeApp.Tests
 {
-    public class 
+    public class
         EmployeeTests
     {
         [Test]
@@ -39,7 +39,7 @@ namespace ChallengeApp.Tests
             employee.GiveGrade(0);
 
             var given = employee.GetStatistics();
-            var expected = new Statistics(0,0,0);
+            var expected = new Statistics(0, 0, 0);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
             Assert.That(given.Max, Is.EqualTo(expected.Max));
@@ -64,21 +64,23 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenOutOfRangeGrades_ShouldIgnore()
+        public void WhenOutOfRangeGrades_ShouldThrowException()
         {
             //Assign
             var employee = new Employee("", "");
             //Act
-            employee.GiveGrade(30);
-            employee.GiveGrade(150);
-            employee.GiveGrade(-2);
+            var actTooBig = () =>
+            {
+                employee.GiveGrade(101);
+            };
+            var actTooSmall = () =>
+            {
+                employee.GiveGrade(-1);
+            };
 
-            var given = employee.GetStatistics();
-            var expected = new Statistics(30, 30, 30);
             //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
+            Assert.That(actTooBig, Throws.Exception);
+            Assert.That(actTooSmall, Throws.Exception);
         }
 
         [Test]
@@ -99,21 +101,18 @@ namespace ChallengeApp.Tests
         }
 
         [Test]
-        public void WhenBadStringGrades_ShouldIgnore()
+        public void WhenBadStringGrades_ShouldThrowException()
         {
             //Assign
             var employee = new Employee("", "");
             //Act
-            employee.GiveGrade("grade");
-            employee.GiveGrade("3-14");
-            employee.GiveGrade("20.70.9");
+            var actBadParse = () =>
+            {
+                employee.GiveGrade("grade");
+            };
 
-            var given = employee.GetStatistics();
-            var expected = new Statistics();
             //Assert
-            Assert.That(given.Min, Is.EqualTo(expected.Min));
-            Assert.That(given.Max, Is.EqualTo(expected.Max));
-            Assert.That(given.Average, Is.EqualTo(expected.Average));
+            Assert.That(actBadParse, Throws.Exception);
         }
 
         [Test]
@@ -135,7 +134,7 @@ namespace ChallengeApp.Tests
             employee.GiveGrade(grade5);
 
             var given = employee.GetStatistics();
-            var expected = new Statistics(10,90,50);
+            var expected = new Statistics(10, 90, 50);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
             Assert.That(given.Max, Is.EqualTo(expected.Max));
@@ -171,6 +170,22 @@ namespace ChallengeApp.Tests
             var given = employee.GetStatistics();
             //Assert
             Assert.That(given.AverageLetter, Is.EqualTo('F'));
+        }
+
+        [Test]
+        public void WhenBadLetterGrade_ShouldThrow_Exception()
+        {
+            //Assign
+            var employee = new Employee("", "");
+
+            //Act
+            var actBadLetter = () =>
+            {
+                employee.GiveGrade('Z');
+            };
+
+            //Assert
+            Assert.That(actBadLetter, Throws.Exception);
         }
     }
 }

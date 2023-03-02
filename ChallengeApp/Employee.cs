@@ -20,7 +20,7 @@
             }
             else
             {
-                Console.WriteLine($"Podana ocena {grade} nie jest w przedziale 0-100.");
+                throw new Exception($"'{grade}' is outside the valid range");
             }
         }
         public void GiveGrade(double grade)
@@ -46,7 +46,7 @@
             }
             else
             {
-                Console.WriteLine($"Podany string \"{gradeText}\" nie jest prawidłową liczbą.");
+                throw new Exception($"Failed to parse \"{gradeText}\" into a float");
             }
         }
         public void GiveGrade(char grade)
@@ -79,8 +79,7 @@
                     GiveGrade(0);
                     break;
                 default:
-                    Console.WriteLine($"'{grade}' nie jest poprawną oceną.");
-                    break;
+                    throw new Exception($"'{grade}' is not a valie grade");
             }
         }
         public Statistics GetStatistics()

@@ -21,13 +21,19 @@ namespace ChallengeApp
                 {
                     break;
                 }
-                if (input.Length == 1)
+                try
                 {
-                    employee.GiveGrade(input[0]);
-                }
-                else
+                    if (input.Length == 1)
+                    {
+                        employee.GiveGrade(input[0]);
+                    }
+                    else
+                    {
+                        employee.GiveGrade(input);
+                    }
+                }catch(Exception ex)
                 {
-                    employee.GiveGrade(input);
+                    Console.WriteLine(ex.Message);
                 }
 
             }
