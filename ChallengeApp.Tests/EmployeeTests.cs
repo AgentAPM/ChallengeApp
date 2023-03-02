@@ -11,7 +11,7 @@ namespace ChallengeApp.Tests
             //Act
             var personals = employee.GetPersonals();
             //Assert
-            Assert.That(personals, Is.EqualTo("Imiê Nazwisko"));
+            Assert.That(personals, Is.EqualTo("Imiê Nazwisko (M)"));
         }
 
         [Test]

@@ -1,16 +1,10 @@
 ﻿namespace ChallengeApp
 {
 
-    public class Employee
+    public class Employee : Pearson
     {
-        public Employee(string name, string lastName)
-        {
-            this.Name = name;
-            this.LastName = lastName;
-        }
-
-        public string Name { get; private set; }
-        public string LastName { get; private set; }
+        public Employee(string name, string lastName) : base(name, lastName) { }
+        public Employee(string name, string lastName, char sex) : base(name, lastName, sex) { }
         public List<float> Grades { get; private set; } = new List<float>();
         public void GiveGrade(float grade)
         {
@@ -52,7 +46,7 @@
         public void GiveGrade(char grade)
         {
 
-            switch(grade)
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -97,11 +91,6 @@
             }
 
             return stats;
-        }
-        public string GetPersonals()
-        {
-            string summary = $"{this.Name} {this.LastName}";
-            return summary;
         }
     }
 }
