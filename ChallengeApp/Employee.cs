@@ -1,11 +1,22 @@
 ﻿namespace ChallengeApp
 {
 
-    public class Employee : Pearson
+    public class Employee : IEmployee
     {
-        public Employee(string name, string lastName) : base(name, lastName) { }
-        public Employee(string name, string lastName, char sex) : base(name, lastName, sex) { }
-        public List<float> Grades { get; private set; } = new List<float>();
+        public Employee(string name, string lastName) { 
+            Name = name;
+            LastName = lastName;
+        }
+        public string Name { get; private set; }
+        public string LastName { get; private set; }
+        public string Personals
+        {
+            get
+            {
+                return $"{this.Name} {this.LastName}";
+            }
+        }
+        private List<float> Grades { get; set; } = new List<float>();
         public void GiveGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
@@ -32,21 +43,21 @@
             var gradeAsFloat = (float)grade;
             GiveGrade(gradeAsFloat);
         }
-        public void GiveGrade(string gradeText)
+        public void GiveGrade(string grade)
         {
-            if (float.TryParse(gradeText, out float gradeAsFloat))
+            if (float.TryParse(grade, out float gradeAsFloat))
             {
-                this.GiveGrade(gradeAsFloat);
+                GiveGrade(gradeAsFloat);
             }
             else
             {
-                throw new Exception($"Failed to parse \"{gradeText}\" into a float");
+                throw new Exception($"Failed to parse \"{grade}\" into a float");
             }
         }
-        public void GiveGrade(char grade)
+        public void GiveGrade(char gradeLetter)
         {
 
-            switch (grade)
+            switch (gradeLetter)
             {
                 case 'A':
                 case 'a':
@@ -73,12 +84,13 @@
                     GiveGrade(0);
                     break;
                 default:
-                    throw new Exception($"'{grade}' is not a valie grade");
+                    throw new Exception($"'{gradeLetter}' is not a valie grade");
             }
         }
         public Statistics GetStatistics()
         {
             var stats = new Statistics();
+            stats.Count = Grades.Count;
             if (Grades.Count > 0)
             {
                 foreach (var grade in Grades)

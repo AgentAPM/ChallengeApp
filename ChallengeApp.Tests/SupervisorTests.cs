@@ -1,26 +1,26 @@
-namespace ChallengeApp.Tests
+ï»¿namespace ChallengeApp.Tests
 {
     public class
-        EmployeeTests
+        SupervisorTests
     {
         [Test]
         public void When_ShouldReturnPersonals()
         {
             //Assign
-            var employee = new Employee("Imiê", "Nazwisko");
+            var supervisor = new Supervisor("ImiÄ™", "Nazwisko");
             //Act
-            var personals = employee.Personals;
+            var personals = supervisor.Personals;
             //Assert
-            Assert.That(personals, Is.EqualTo("Imiê Nazwisko"));
+            Assert.That(personals, Is.EqualTo("spv. ImiÄ™ Nazwisko"));
         }
 
         [Test]
         public void WhenNoGrades_ShouldReturnDefault()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             var expected = new Statistics();
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
@@ -32,13 +32,13 @@ namespace ChallengeApp.Tests
         public void WhenZeroGrades_ShouldReturnZero()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
-            employee.GiveGrade(0);
-            employee.GiveGrade(0);
-            employee.GiveGrade(0);
+            supervisor.GiveGrade(0);
+            supervisor.GiveGrade(0);
+            supervisor.GiveGrade(0);
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             var expected = new Statistics(0, 0, 0);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
@@ -50,12 +50,12 @@ namespace ChallengeApp.Tests
         public void WhenPositiveGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
-            employee.GiveGrade(50);
-            employee.GiveGrade(10);
+            supervisor.GiveGrade(50);
+            supervisor.GiveGrade(10);
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             var expected = new Statistics(10, 50, 30);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
@@ -67,15 +67,15 @@ namespace ChallengeApp.Tests
         public void WhenOutOfRangeGrades_ShouldThrowException()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
             var actTooBig = () =>
             {
-                employee.GiveGrade(101);
+                supervisor.GiveGrade(101);
             };
             var actTooSmall = () =>
             {
-                employee.GiveGrade(-1);
+                supervisor.GiveGrade(-1);
             };
 
             //Assert
@@ -87,12 +87,12 @@ namespace ChallengeApp.Tests
         public void WhenStringGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
-            employee.GiveGrade("40");
-            employee.GiveGrade("60");
+            supervisor.GiveGrade("40");
+            supervisor.GiveGrade("60");
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             var expected = new Statistics(40, 60, 50);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
@@ -104,11 +104,11 @@ namespace ChallengeApp.Tests
         public void WhenBadStringGrades_ShouldThrowException()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             //Act
             var actBadParse = () =>
             {
-                employee.GiveGrade("grade");
+                supervisor.GiveGrade("grade");
             };
 
             //Assert
@@ -119,7 +119,7 @@ namespace ChallengeApp.Tests
         public void WhenDifferentTypeGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
             float grade1 = 10;
             int grade2 = 30;
             string grade5 = "50";
@@ -127,13 +127,13 @@ namespace ChallengeApp.Tests
             long grade3 = 90;
 
             //Act
-            employee.GiveGrade(grade1);
-            employee.GiveGrade(grade2);
-            employee.GiveGrade(grade3);
-            employee.GiveGrade(grade4);
-            employee.GiveGrade(grade5);
+            supervisor.GiveGrade(grade1);
+            supervisor.GiveGrade(grade2);
+            supervisor.GiveGrade(grade3);
+            supervisor.GiveGrade(grade4);
+            supervisor.GiveGrade(grade5);
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             var expected = new Statistics(10, 90, 50);
             //Assert
             Assert.That(given.Min, Is.EqualTo(expected.Min));
@@ -145,16 +145,16 @@ namespace ChallengeApp.Tests
         public void WhenLetterGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
 
             //Act
-            employee.GiveGrade('A');
-            employee.GiveGrade('A');
-            employee.GiveGrade('B');
-            employee.GiveGrade('A');
-            employee.GiveGrade('C');
+            supervisor.GiveGrade('A');
+            supervisor.GiveGrade('A');
+            supervisor.GiveGrade('B');
+            supervisor.GiveGrade('A');
+            supervisor.GiveGrade('C');
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             //Assert
             Assert.That(given.AverageLetter, Is.EqualTo('A'));
         }
@@ -163,11 +163,11 @@ namespace ChallengeApp.Tests
         public void WhenNoLetterGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
 
             //Act
 
-            var given = employee.GetStatistics();
+            var given = supervisor.GetStatistics();
             //Assert
             Assert.That(given.AverageLetter, Is.EqualTo('F'));
         }
@@ -176,16 +176,48 @@ namespace ChallengeApp.Tests
         public void WhenBadLetterGrade_ShouldThrow_Exception()
         {
             //Assign
-            var employee = new Employee("", "");
+            var supervisor = new Supervisor("", "");
 
             //Act
             var actBadLetter = () =>
             {
-                employee.GiveGrade('Z');
+                supervisor.GiveGrade('Z');
             };
 
             //Assert
             Assert.That(actBadLetter, Throws.Exception);
+        }
+
+        [Test]
+        public void WhenStringGrade_ShouldReturnCorrect()
+        {
+            //Assign
+            var supervisor = new Supervisor("", "");
+
+            //Act
+            supervisor.GiveGrade("6");
+            supervisor.GiveGrade("6-");
+            supervisor.GiveGrade("+5");
+            supervisor.GiveGrade("5");
+            supervisor.GiveGrade("5-");
+            supervisor.GiveGrade("+4");
+            supervisor.GiveGrade("4");
+            supervisor.GiveGrade("-4");
+            supervisor.GiveGrade("3+");
+            supervisor.GiveGrade("3");
+            supervisor.GiveGrade("3-");
+            supervisor.GiveGrade("+2");
+            supervisor.GiveGrade("2");
+            supervisor.GiveGrade("2-");
+            supervisor.GiveGrade("+1");
+            supervisor.GiveGrade("1");
+
+            var stats = supervisor.GetStatistics();
+
+            //Assert
+            Assert.That(stats.Min, Is.EqualTo(0));
+            Assert.That(stats.Max, Is.EqualTo(100));
+            Assert.That(stats.Average, Is.EqualTo(50));
         }
     }
 }

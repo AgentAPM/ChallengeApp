@@ -31,20 +31,21 @@ namespace ChallengeApp
                     {
                         employee.GiveGrade(input);
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
 
             }
             var stats = employee.GetStatistics();
-            if (employee.Grades.Count > 0)
+            if (stats.Count > 0)
             {
-                Console.WriteLine($"Pracownik {employee.GetPersonals()} otrzymał oceny z zakresu {stats.Min} - {stats.Max}. Jego ogólna ocena to {stats.AverageLetter}.");
+                Console.WriteLine($"Pracownik {employee.Personals} otrzymał oceny z zakresu {stats.Min} - {stats.Max}. Jego ogólna ocena to {stats.AverageLetter}.");
             }
             else
             {
-                Console.WriteLine($"Pracownik {employee.GetPersonals()} nie otrzymał żadnych ocen.");
+                Console.WriteLine($"Pracownik {employee.Personals} nie otrzymał żadnych ocen.");
             }
             Console.WriteLine("Dziękujemy za korzystanie z programu XYZ");
             return 0;
