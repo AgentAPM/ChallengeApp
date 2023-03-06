@@ -7,7 +7,7 @@ namespace ChallengeApp.Tests
         public void When_ShouldReturnPersonals()
         {
             //Assign
-            var employee = new Employee("Imiê", "Nazwisko");
+            var employee = new EmployeeInMemory("Imiê", "Nazwisko");
             //Act
             var personals = employee.Personals;
             //Assert
@@ -18,7 +18,7 @@ namespace ChallengeApp.Tests
         public void WhenNoGrades_ShouldReturnDefault()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             var given = employee.GetStatistics();
             var expected = new Statistics();
@@ -32,7 +32,7 @@ namespace ChallengeApp.Tests
         public void WhenZeroGrades_ShouldReturnZero()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             employee.GiveGrade(0);
             employee.GiveGrade(0);
@@ -50,7 +50,7 @@ namespace ChallengeApp.Tests
         public void WhenPositiveGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             employee.GiveGrade(50);
             employee.GiveGrade(10);
@@ -67,7 +67,7 @@ namespace ChallengeApp.Tests
         public void WhenOutOfRangeGrades_ShouldThrowException()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             var actTooBig = () =>
             {
@@ -87,7 +87,7 @@ namespace ChallengeApp.Tests
         public void WhenStringGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             employee.GiveGrade("40");
             employee.GiveGrade("60");
@@ -104,7 +104,7 @@ namespace ChallengeApp.Tests
         public void WhenBadStringGrades_ShouldThrowException()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             //Act
             var actBadParse = () =>
             {
@@ -119,7 +119,7 @@ namespace ChallengeApp.Tests
         public void WhenDifferentTypeGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
             float grade1 = 10;
             int grade2 = 30;
             string grade5 = "50";
@@ -145,7 +145,7 @@ namespace ChallengeApp.Tests
         public void WhenLetterGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
 
             //Act
             employee.GiveGrade('A');
@@ -163,7 +163,7 @@ namespace ChallengeApp.Tests
         public void WhenNoLetterGrades_ShouldReturnCorrect()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
 
             //Act
 
@@ -176,7 +176,7 @@ namespace ChallengeApp.Tests
         public void WhenBadLetterGrade_ShouldThrow_Exception()
         {
             //Assign
-            var employee = new Employee("", "");
+            var employee = new EmployeeInMemory("", "");
 
             //Act
             var actBadLetter = () =>

@@ -6,7 +6,7 @@ namespace ChallengeApp
     {
         public static int Main(string[] args)
         {
-            var employee = new Employee("Jan", "Kowalski");
+            var employee = new EmployeeInFile("Jan", "Kowalski");
 
             Console.Clear();
             Console.WriteLine("Witamy w programie XYZ do oceny pracowników");

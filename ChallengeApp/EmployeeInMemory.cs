@@ -1,23 +1,12 @@
 ﻿namespace ChallengeApp
 {
-
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-        public Employee(string name, string lastName) { 
-            Name = name;
-            LastName = lastName;
-        }
-        public string Name { get; private set; }
-        public string LastName { get; private set; }
-        public string Personals
-        {
-            get
-            {
-                return $"{this.Name} {this.LastName}";
-            }
-        }
+        public EmployeeInMemory(string name, string lastName)
+            : base(name, lastName)
+        { }
         private List<float> Grades { get; set; } = new List<float>();
-        public void GiveGrade(float grade)
+        public override void GiveGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -28,22 +17,22 @@
                 throw new Exception($"'{grade}' is outside the valid range");
             }
         }
-        public void GiveGrade(double grade)
+        public override void GiveGrade(double grade)
         {
             var gradeAsFloat = (float)grade;
             GiveGrade(gradeAsFloat);
         }
-        public void GiveGrade(long grade)
+        public override void GiveGrade(long grade)
         {
             var gradeAsFloat = (float)grade;
             GiveGrade(gradeAsFloat);
         }
-        public void GiveGrade(int grade)
+        public override void GiveGrade(int grade)
         {
             var gradeAsFloat = (float)grade;
             GiveGrade(gradeAsFloat);
         }
-        public void GiveGrade(string grade)
+        public override void GiveGrade(string grade)
         {
             if (float.TryParse(grade, out float gradeAsFloat))
             {
@@ -54,7 +43,7 @@
                 throw new Exception($"Failed to parse \"{grade}\" into a float");
             }
         }
-        public void GiveGrade(char gradeLetter)
+        public override void GiveGrade(char gradeLetter)
         {
 
             switch (gradeLetter)
@@ -84,10 +73,10 @@
                     GiveGrade(0);
                     break;
                 default:
-                    throw new Exception($"'{gradeLetter}' is not a valie grade");
+                    throw new Exception($"'{gradeLetter}' is not a valid grade");
             }
         }
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var stats = new Statistics();
             stats.Count = Grades.Count;
