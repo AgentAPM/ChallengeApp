@@ -6,7 +6,12 @@ namespace ChallengeApp
     {
         public static int Main(string[] args)
         {
-            var employee = new EmployeeInFile("Jan", "Kowalski");
+            EmployeeBase employee = new EmployeeInMemory("Jan", "Kowalski");
+
+            employee.GradeAdded += (sender, e) =>
+            {
+                Console.WriteLine("Przyznano ocenę");
+            };
 
             Console.Clear();
             Console.WriteLine("Witamy w programie XYZ do oceny pracowników");
@@ -50,5 +55,6 @@ namespace ChallengeApp
             Console.WriteLine("Dziękujemy za korzystanie z programu XYZ");
             return 0;
         }
+
     }
 }

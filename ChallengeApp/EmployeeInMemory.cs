@@ -11,6 +11,8 @@
             if (grade >= 0 && grade <= 100)
             {
                 Grades.Add(grade);
+
+                EmitEventGradeAdded();
             }
             else
             {

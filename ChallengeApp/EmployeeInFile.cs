@@ -2,10 +2,16 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
-        private const string fileName = "grades.txt";
-        public EmployeeInFile(string name, string lastName)
+        private readonly string fileName = "grades.txt";
+        public EmployeeInFile(string name, string lastName, string filename)
             : base(name, lastName)
-        { }
+        { 
+            fileName = filename;
+            if (!File.Exists(fileName))
+            {
+                File.Create(fileName);
+            }
+        }
 
         public override Statistics GetStatistics()
         {
@@ -46,6 +52,8 @@
             {
                 writer.WriteLine(grade);
             }
+
+            EmitEventGradeAdded();
         }
 
         public override void GiveGrade(double grade)
