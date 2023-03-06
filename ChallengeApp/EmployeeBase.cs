@@ -4,10 +4,10 @@
     public abstract class EmployeeBase : IEmployee
     {
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
-        public event GradeAddedDelegate? GradeAdded;
+        public event GradeAddedDelegate? EventGradeAdded;
         protected void EmitEventGradeAdded()
         {
-            if(GradeAdded != null) GradeAdded(this, EventArgs.Empty);
+            if(EventGradeAdded != null) EventGradeAdded(this, EventArgs.Empty);
         }
         public EmployeeBase(string name, string lastName) { 
             Name = name;

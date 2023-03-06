@@ -81,16 +81,10 @@
         public override Statistics GetStatistics()
         {
             var stats = new Statistics();
-            stats.Count = Grades.Count;
-            if (Grades.Count > 0)
+            
+            foreach(var grade in Grades)
             {
-                foreach (var grade in Grades)
-                {
-                    stats.Min = Math.Min(stats.Min, grade);
-                    stats.Max = Math.Max(stats.Max, grade);
-                    stats.Average += grade;
-                }
-                stats.Average /= Grades.Count;
+                stats.AddGrade(grade);
             }
 
             return stats;

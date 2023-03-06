@@ -6,9 +6,9 @@ namespace ChallengeApp
     {
         public static int Main(string[] args)
         {
-            EmployeeBase employee = new EmployeeInMemory("Jan", "Kowalski");
+            EmployeeBase employee = new EmployeeInFile("Andrzej", "Nowak","anowak_grades.txt");
 
-            employee.GradeAdded += (sender, e) =>
+            employee.EventGradeAdded += (sender, e) =>
             {
                 Console.WriteLine("Przyznano ocenę");
             };

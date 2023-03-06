@@ -1,11 +1,13 @@
-﻿namespace ChallengeApp
+﻿using System.Runtime.Serialization;
+
+namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
-        private readonly string fileName = "grades.txt";
+        private readonly string fileName;
         public EmployeeInFile(string name, string lastName, string filename)
             : base(name, lastName)
-        { 
+        {
             fileName = filename;
             if (!File.Exists(fileName))
             {
@@ -20,22 +22,13 @@
             {
                 using (var reader = File.OpenText(fileName))
                 {
-                    var line = reader.ReadLine();
-                    int count = 0;
-                    while (line != null)
+                    string? line;
+                    while ((line = reader.ReadLine()) != null)
                     {
                         var grade = float.Parse(line);
 
-                        stats.Min = Math.Min(stats.Min, grade);
-                        stats.Max = Math.Max(stats.Max, grade);
-                        stats.Average += grade;
-
-                        count++;
-
-                        line = reader.ReadLine();
+                        stats.AddGrade(grade);
                     }
-                    stats.Average /= count;
-                    stats.Count = count;
                 }
             }
             else
